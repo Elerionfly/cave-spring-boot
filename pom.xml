@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.18</version>
+		<version>3.4.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.exercise</groupId>
@@ -28,10 +28,14 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>1.8</java.version>
-		<spring-swagger2.version>2.9.2</spring-swagger2.version>
+		<java.version>17</java.version>
 		<application.name>testTarifas</application.name>
 		<lombok.version>1.16.20</lombok.version>
+		<springdoc.version>2.8.5</springdoc.version>
+		<jackson-core.version>2.17.0</jackson-core.version>
+		<jackson-module.version>2.15.0</jackson-module.version>
+		<springdoc.maven.plugin.version>1.4</springdoc.maven.plugin.version>
+		<maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -49,11 +53,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--<dependency>
-			<groupId>org.openapitools</groupId>
-			<artifactId>openapi-generator-cli</artifactId>
-			<version>6.6.0</version>
-		</dependency> -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -63,14 +68,29 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>2.15.0</version>
+			<version>${jackson-core.version}</version>
 		</dependency>
 
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.module</groupId>
 			<artifactId>jackson-module-parameter-names</artifactId>
-			<version>2.15.0</version>
+			<version>${jackson-module.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -83,11 +103,20 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>${maven.compiler.plugin.version}</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+					<compilerArgs>
+						<arg>--add-opens=java.base/java.lang.reflect=ALL-UNNAMED;--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
+					</compilerArgs>					
+        			<jvmArguments>-Dspring.application.admin.enabled=true</jvmArguments>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-maven-plugin</artifactId>
+				<version>${springdoc.maven.plugin.version}</version>
 			</plugin>
 		</plugins>
 	</build>
