@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.2</version>
+		<version>2.7.18</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.exercise</groupId>
@@ -28,7 +28,7 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>1.8</java.version>
 		<spring-swagger2.version>2.9.2</spring-swagger2.version>
 		<application.name>testTarifas</application.name>
 		<lombok.version>1.16.20</lombok.version>
@@ -49,6 +49,29 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>openapi-generator-cli</artifactId>
+			<version>6.6.0</version>
+		</dependency> -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.15.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-parameter-names</artifactId>
+			<version>2.15.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -60,34 +83,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
+				<version>3.8.1</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.openapitools</groupId>
-				<artifactId>openapi-generator-maven-plugin</artifactId>
-				<version>6.6.0</version> <!-- Use the latest version -->
-				<executions>
-					<execution>
-					<goals>
-						<goal>generate</goal>
-					</goals>
-					<configuration>
-						<inputSpec>${project.basedir}/src/main/resources/swagger/tarifas-service.yml</inputSpec>
-						<generatorName>spring</generatorName>
-						<output>${project.basedir}/target/generated-sources/openapi</output> 
-						<apiPackage>com.tarifas.api</apiPackage>
-						<modelPackage>com.tarifas.model</modelPackage> 
-						<configOptions>
-							<interfaceOnly>true</interfaceOnly>
-							<useTags>true</useTags>
-						</configOptions>
-					</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
