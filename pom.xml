@@ -58,6 +58,15 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.openapitools</groupId>
 				<artifactId>openapi-generator-maven-plugin</artifactId>
 				<version>6.6.0</version> <!-- Use the latest version -->
@@ -73,8 +82,8 @@
 						<apiPackage>com.tarifas.api</apiPackage>
 						<modelPackage>com.tarifas.model</modelPackage> 
 						<configOptions>
-						<interfaceOnly>true</interfaceOnly>
-						<useTags>true</useTags>
+							<interfaceOnly>true</interfaceOnly>
+							<useTags>true</useTags>
 						</configOptions>
 					</configuration>
 					</execution>
