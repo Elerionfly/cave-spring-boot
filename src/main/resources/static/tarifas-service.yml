@@ -118,7 +118,7 @@ components:
   parameters:
     idParam:
       name: id
-      in: query
+      in: path
       description: el identificador de la tarifa.
       required: true
       schema:
