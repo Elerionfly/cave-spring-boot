@@ -1,0 +1,224 @@
+openapi: 3.0.3
+info:
+  title: Tarifas - OpenAPI 3.0
+  description: 
+    Servicios para el ejercico virtualcave
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: sermelasn@gmail.com
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: Tarifa
+    description: Operaciones sobre tarifas.
+paths:
+  /V1/tarifa:
+    post:
+      tags:
+        - Tarifa
+      summary: Endpoint para crear una tarifa nueva.
+      operationId: createTarifa
+      requestBody:
+        description: Parámetros de entrada para el alta de una tarifa.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTarifaDTO'
+        required: true
+      responses:
+        '200':
+          description: Registro creado con éxito
+          content:
+            application/json: 
+              schema:
+                $ref: '#/components/schemas/TarifaDTO'
+        '500':
+          description: Error interno no controlado.
+    put:
+      tags:
+        - Tarifa
+      summary: Endpoint para modificar el precio de las tarifas.
+      operationId: updateTarifaPrice
+      requestBody:
+        description: Parámetros para realizar la actualización.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TarifaDTO'
+        required: true
+      responses:
+        '200':
+          description: Precio actualizado con éxito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TarifaDTO' 
+        '500':
+          description: Error interno no controlado.
+  /V1/tarifa/{id}:
+    get:
+      tags:
+        - Tarifa
+      summary: Endpoint para obtener una tarifa por Id.
+      operationId: getTarifaById
+      parameters:
+        - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Registro encontrado con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TarifaFormatedDTO'
+        '404':
+          description: No se han encontrado registros.
+        '500':
+          description: Error interno no controlado.
+    delete:
+      tags:
+        - Tarifa
+      summary: Endpoint para eliminar una tarifa por su id.
+      operationId: deleteTarifaById
+      parameters:
+        - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Registro eliminado con éxito.
+        '500':
+          description: Error interno no controlado.
+  /V1/tarifa/customSearch:
+    post:
+      tags:
+        - Tarifa
+      summary: Búsqueda personalizada de tarifas.
+      operationId: getTarifaByDateProductoMarca
+      requestBody:
+        description: Parámetros con los que realizar la búsqueda.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TarifaCustomSearchDTO'
+      responses:
+        '200':
+          description: Tarifas encontradas con éxito.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TarifaFormatedDTO'
+        '404':
+          description: No se han encontrado registros.
+        '500':
+          description: Error interno no preparado.
+components:
+  parameters:
+    idParam:
+      name: id
+      in: query
+      description: el identificador de la tarifa.
+      required: true
+      schema:
+        type: number
+        example: 3
+  schemas:
+    TarifaCustomSearchDTO:
+      type: object
+      properties:
+        fechaFiltro:
+          type: string
+          format: date
+          description: Fecha para filtrar las tarifas.
+          example: '2025-02-15'
+        brandId:
+          type: number
+          description: identificador de la marca.
+          example: 1
+          maxLength: 4
+        productId:
+          type: number
+          description: identificador de producto.
+          example: 3
+          maxLength: 4
+    TarifaFormatedDTO:
+      type: object
+      properties:
+        id:
+          type: number
+          description: identificador único de la tarifa
+          example: 9
+          maxLength: 4
+        brandId:
+          type: number
+          description: identificador de la marca.
+          example: 1
+          maxLength: 4
+        productId:
+          type: number
+          description: identificador de producto.
+          example: 3
+          maxLength: 4
+        fechaInicio:
+          type: string
+          format: date
+          description: fecha de inicio de la tarifa.
+          example: '2025-02-18'
+        fechaFin:
+          type: string
+          format: date
+          description: fecha de fin de la tarifa.
+          example: '2025-02-28'
+        precioFormateado:
+          type: string
+          description: El precio formateado con la moneda.
+          example: '20,87€'          
+    CreateTarifaDTO:
+      type: object
+      properties:
+        brandId:
+          type: number
+          description: identificador de la marca.
+          example: 1
+          maxLength: 4
+        productId:
+          type: number
+          description: identificador de producto.
+          example: 3
+          maxLength: 4
+        fechaInicio:
+          type: string
+          format: date
+          description: fecha de inicio de la tarifa.
+          example: '2025-02-18'
+        fechaFin:
+          type: string
+          format: date
+          description: fecha de fin de la tarifa.
+          example: '2025-02-28'
+        precio:
+          type: number
+          description: precio del producto sin decimales.
+          example: 3050
+          maxLength: 5
+        codMoneda:
+          type: string
+          description: código ISO de la moneda.
+          example: 'EUR'
+    TarifaDTO:
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: number
+              description: identificador único de la tarifa
+              example: 9
+              maxLength: 4
+        - $ref: '#/components/schemas/CreateTarifaDTO'
+
+        
+
+
+
