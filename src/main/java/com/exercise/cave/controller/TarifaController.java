@@ -47,7 +47,7 @@ public class TarifaController {
 
     @DeleteMapping("/V1/tarifa/{id}")
     public void deleteTarifaById(@PathVariable("id") Integer id) {
-        System.out.println(id);
+        this.tarifaService.deleteTarifaById(id);
     }
 
     @PostMapping("/V1/tarifa/customSearch")

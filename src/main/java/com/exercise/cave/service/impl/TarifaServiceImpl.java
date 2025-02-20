@@ -42,8 +42,7 @@ public class TarifaServiceImpl implements TarifaService {
 
     @Override
     public void deleteTarifaById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteTarifaById'");
+        this.tarifaRepository.deleteById(id);
     }
 
     @Override
