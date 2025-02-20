@@ -53,9 +53,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TarifaDTO' 
+                $ref: '#/components/schemas/TarifaDTO' 
         '500':
           description: Error interno no controlado.
   /V1/tarifa/{id}:
@@ -118,7 +116,7 @@ components:
   parameters:
     idParam:
       name: id
-      in: query
+      in: path
       description: el identificador de la tarifa.
       required: true
       schema:
