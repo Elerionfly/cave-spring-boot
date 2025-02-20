@@ -29,19 +29,16 @@ public class TarifaController {
 
     @PostMapping("/V1/tarifa")
     public ResponseEntity<TarifaDTO> createTarifa(@RequestBody CreateTarifaDTO entity) {
-        System.out.println(entity.getCodMoneda());
         return ResponseEntity.ok(this.tarifaService.createTarifaDTO(entity));
     }
 
     @PutMapping("/V1/tarifa")
-    public ResponseEntity<List<TarifaDTO>> updateTarifaPrice(@RequestBody TarifaDTO entity) {
-        System.out.println(entity.getFechaInicio());        
-        return null;
+    public ResponseEntity<TarifaDTO> updateTarifaPrice(@RequestBody TarifaDTO entity) {       
+        return ResponseEntity.ok(this.tarifaService.updateTarifaPrice(entity));
     }
     
     @GetMapping("/V1/tarifa/{id}")
     public ResponseEntity<TarifaFormatedDTO> getTarifaById(@PathVariable("id") Integer id) {
-        System.out.println(id);
         return ResponseEntity.ok(new TarifaFormatedDTO());
     }
 
@@ -52,7 +49,6 @@ public class TarifaController {
 
     @PostMapping("/V1/tarifa/customSearch")
     public ResponseEntity<List<TarifaFormatedDTO>> getTarifaByDateProductoMarca(@RequestBody TarifaCustomSearchDTO entity) {
-        System.out.println(entity.getFechaFiltro());
         return null;
     }
     

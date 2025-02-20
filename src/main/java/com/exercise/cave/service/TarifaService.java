@@ -21,7 +21,7 @@ public interface TarifaService {
      * @param tarifaDTO
      * @return devuelve una lista de las distintas tarifas actualizadas
      */
-    public List<TarifaDTO> updateTarifaPrice(TarifaDTO tarifaDTO);
+    public TarifaDTO updateTarifaPrice(TarifaDTO tarifaDTO);
 
     /**
      * Método para buscar una tarifa por Id

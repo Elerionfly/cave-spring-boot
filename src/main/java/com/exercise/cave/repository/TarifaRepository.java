@@ -7,5 +7,5 @@ import com.exercise.cave.model.Tarifa;
 
 @Repository
 public interface TarifaRepository extends JpaRepository<Tarifa, Integer> {
-    
+
 } 
