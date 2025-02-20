@@ -60,84 +60,27 @@ Desde la misma pantalla se pueden lanzar las llamadas a lo servicios para probar
 ## Instalación
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/your-username/your-repository.git
+   git clone https://github.com/Elerionfly/cave-spring-boot.git
    ```
-2. Navigate to the project directory:
+2. Navega al directorio donde se ha descargado:
    ```bash
-   cd your-repository
+   cd directorio/donde/se/haya/hecho/el/checkout
    ```
-3. Install dependencies:
+3. Instala las dependencias:
    ```bash
-   npm install
+   mvn clean install -U
    ```
+4. Arranca el servidor (dependiente del entorno de trabajo donde se este desplegando).
+5. Accede a http://localhost:8080/swagger-ui/index.html para comenzar a probar.
 
-## Usage
-- How to run the project
-- Example commands
-- Configuration options
-
-## Contributing
-- Fork the repository
-- Create a new branch
-- Submit a pull request
+## Recomendaciones para la prueba técnica
+- Ofrecer un proyecto "en blanco" para la prueba técnica para no tener que perder el tiempo creando un entorno de trabajo (instalar BBDD, preparado IDE, recoger versiones de trabajo y sus depedencias...).
+- No sé si el uso de Postgres es necesário por parte del cliente o simplemente porque se ha decidido así; pero tal vez sería más práctico utilizar h2 liquibase para la prueba técnica. Incluso si se hace un proyecto "en blanco" se puede dejar el .xml para h2 con los datos ya cargados; así se valoría realmente el conocimiento sobre Springboot y no sobre BBDD.
+- Especificar que versiones de Java/Springboot se requiere para la prueba técnica.
+- Se podría añadir una segunda tabla, la de productos o la de marcas, con una FK asociandola a la de tarifas y así obligar a crear alguna relacion @OneToMany o @ManyToMany para la prueba.
 
 ## License
-This project is licensed under the MIT License.
-
-# Project Name
-
-## Description
-A brief description of what your project does and its purpose.
-
-## Features
-- Feature 1
-- Feature 2
-- Feature 3
-
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/your-repository.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd your-repository
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-## Usage
-- How to run the project
-- Example commands
-- Configuration options
-
-## Example Test
-**Run the following command to execute tests:**
-   ```bash
-   npm test
-   ```
-
-## Displaying Properties
-To display properties from the `.properties` file, use the following command:
-   ```bash
-   cat application.properties | grep "^your.property.name"
-   ```
-Example `.properties` file:
-   ```properties
-   app.name=MyCoolApp
-   app.version=1.0.0
-   app.env=production
-   ```
-
-## Contributing
-- Fork the repository
-- Create a new branch
-- Submit a pull request
-
-## License
-This project is licensed under the MIT License.
+Ninguna, os lo regalo todo.
 
 
 
